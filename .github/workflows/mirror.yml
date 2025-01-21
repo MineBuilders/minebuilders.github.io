@@ -19,8 +19,8 @@ jobs:
           path: temp-repo
 
       - run: |
-          pwd
-          ls -R
+          cp -r ./* ../backup/
+          rm -rf ../backup/.git
 
       - name: Checkout the current repository (destination repository)
         uses: actions/checkout@v2
@@ -28,12 +28,8 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           
       - run: |
-          pwd
-          ls -R
-
-      - name: Copy files from MineBuilders/.github to current repository
-        run: |
-          cp -r ./temp-repo/* .
+          find . -mindepth 1 -not -path './.git/*' -exec rm -rf {} +
+          cp -r ../backup/* .
 
       - name: Commit and push to the main branch
         run: |
