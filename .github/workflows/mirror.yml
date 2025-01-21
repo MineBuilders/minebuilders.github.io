@@ -1,0 +1,26 @@
+name: Deploy Website
+
+on:
+  schedule:
+    - cron: '0 1 * * *'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the .github repository (source repository)
+        uses: actions/checkout@v2
+        with:
+          repository: MineBuilders/.github
+          ref: gh-pages
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit and push to minebuilders.github.io
+        run: |
+          cd .github
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'actions@github.com'
+          git add .
+          git commit -m "Deploy website from .github repository"
+          git push origin main
