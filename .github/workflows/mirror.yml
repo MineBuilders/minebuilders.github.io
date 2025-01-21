@@ -1,9 +1,9 @@
 name: Mirror Website
 
 on:
+  schedule:
+    - cron: '0 1 * * *'
   workflow_dispatch:
-  repository_dispatch:
-    types: [trigger-mirror]
 
 jobs:
   deploy:
