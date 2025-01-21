@@ -24,7 +24,7 @@ jobs:
 
       - name: Copy files from MineBuilders/.github to current repository
         run: |
-          cp -r .github/* ../
+          cp -r ./* ../
 
       - name: Commit and push to the main branch
         run: |
