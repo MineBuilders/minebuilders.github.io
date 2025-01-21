@@ -9,12 +9,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout the current repository (destination repository)
-        uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
+    steps:    
       - name: Checkout MineBuilders/.github repository (source repository)
         uses: actions/checkout@v2
         with:
@@ -23,9 +18,14 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           path: temp-repo
 
+      - name: Checkout the current repository (destination repository)
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Copy files from MineBuilders/.github to current repository
         run: |
-          cp -r temp-repo/. .
+          cp -r temp-repo/* .
 
       - name: Commit and push to the main branch
         run: |
