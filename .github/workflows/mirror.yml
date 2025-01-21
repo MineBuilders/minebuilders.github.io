@@ -19,7 +19,7 @@ jobs:
           path: temp-repo
 
       - run: |
-          cwd
+          pwd
           ls -R
 
       - name: Checkout the current repository (destination repository)
@@ -28,7 +28,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           
       - run: |
-          cwd
+          pwd
           ls -R
 
       - name: Copy files from MineBuilders/.github to current repository
